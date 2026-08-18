@@ -73,42 +73,78 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background-color: rgba(30, 58, 138, 0.95);
         }
         
-        /* Floating CTA Button */
-        .float-cta {
+        
+        /* Two Floating CTA Buttons */
+        .float-cta-wrap {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #f97316; /* Orange-500 */
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 92%;
+            max-width: 430px;
+        }
+        .float-cta {
+            background-color: #f97316;
             color: #FFF;
             border-radius: 50px;
-            padding: 10px 20px;
+            padding: 11px 18px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             transition: all 0.3s;
             cursor: pointer;
-            width: 90%;
-            max-width: 400px;
+            width: 100%;
             border: 2px solid white;
             white-space: nowrap;
+            font-weight: 700;
+        }
+        .float-cta.float-cta-alt {
+            background-color: #1e3a8a;
         }
         @media (min-width: 768px) {
-            .float-cta {
+            .float-cta-wrap {
                 width: auto;
                 bottom: 30px;
-                padding: 12px 25px;
+                min-width: 320px;
+            }
+            .float-cta {
+                padding: 12px 22px;
             }
         }
         .float-cta:hover {
-            transform: translateX(-50%) scale(1.05);
-            background-color: #ea580c; /* Orange-600 */
+            transform: scale(1.03);
+            background-color: #ea580c;
+        }
+        .float-cta.float-cta-alt:hover {
+            background-color: #1d4ed8;
         }
         .float-cta i {
             animation: phone-shake 2s infinite;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .float-cta .cta-text {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+        .float-cta .cta-number {
+            direction: ltr;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+        }
+        @media (min-width: 768px) {
+            .float-cta .cta-text {
+                font-size: 15px;
+            }
         }
 
         @keyframes phone-shake {
@@ -329,7 +365,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container mx-auto px-4">
         <div class="text-center mb-10 md:mb-16">
             <h3 class="text-blue-900 font-bold text-base md:text-lg mb-2">خدماتنا المتميزة</h3>
-          
+            <h2 class="text-2xl md:text-4xl font-black text-gray-800">محتوى كل صورة يعكس خدمة حقيقية نقدمها</h2>
+            <p class="text-sm md:text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-8">
+                قمنا بربط كل صورة بالمحتوى المناسب لها حتى تكون الصفحة أوضح للعميل،
+                وتعرض خدمات <strong>القاضى موڤينج</strong> بشكل تسويقي ومتناسق.
+            </p>
             <div class="w-16 md:w-24 h-1 bg-orange-600 mx-auto mt-3 md:mt-4 rounded"></div>
         </div>
 
@@ -548,7 +588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="text-2xl md:text-3xl text-orange-600"><i class="fas fa-phone-volume"></i></div>
                             <div>
                                 <h4 class="font-bold text-gray-800 text-sm md:text-base">أرقام الهاتف</h4>
-                                <p class="text-gray-600 font-en text-base md:text-lg font-bold" dir="ltr">01015944843</p>
+                                <div class="text-gray-600 font-en text-base md:text-lg font-bold space-y-1" dir="ltr"><p>01015917480</p><p>01015946843</p></div>
                             </div>
                         </div>
                     </div>
@@ -611,13 +651,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
+    
     <!-- New Floating Call Action -->
-    <div class="float-cta" onclick="openModal()">
-        <i class="fas fa-phone-volume text-xl md:text-2xl"></i>
-        <span class="font-bold text-xs md:text-base">إتصل واعرف تكلفة نقل العفش الأن</span>
+    <div class="float-cta-wrap">
+        <button class="float-cta" onclick="openModal()">
+            <i class="fas fa-phone-volume"></i>
+            <span class="cta-text">اتصل الآن <span class="cta-number">01015917480</span></span>
+        </button>
+        <button class="float-cta float-cta-alt" onclick="openModal()">
+            <i class="fas fa-phone-volume"></i>
+            <span class="cta-text">اتصل الآن <span class="cta-number">01015946843</span></span>
+        </button>
     </div>
-
-    <!-- Call Confirmation Modal -->
+<!-- Call Confirmation Modal -->
     <div id="callModal" class="modal">
         <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm md:max-w-md text-center relative border-t-8 border-orange-600 mx-4">
             <!-- Close Button -->
@@ -630,41 +676,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             
             <h3 class="text-xl md:text-2xl font-black text-blue-900 mb-2">تأكيد الإتصال</h3>
-            <p class="text-gray-600 text-sm md:text-base mb-6">هل تود التحدث مع خدمة العملاء لمعرفة الأسعار؟</p>
+            <p class="text-gray-600 text-sm md:text-base mb-6">اختر رقم الهاتف المناسب واضغط عليه للاتصال المباشر بخدمة العملاء.</p>
             
-            <a href="tel:01015944843"
-               class="conversion-btn group block bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 border-2 border-orange-500 rounded-xl p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95"
-               aria-label="اضغط للاتصال الآن على 01015944843">
-                <p class="text-xs md:text-sm text-orange-700 font-bold mb-2 flex items-center justify-center gap-2">
-                    <i class="fas fa-hand-pointer animate-pulse" aria-hidden="true"></i>
-                    اضغط على الرقم للاتصال مباشرة
-                </p>
-                <div class="flex items-center justify-center gap-3" dir="ltr">
-                    <span class="w-11 h-11 rounded-full bg-orange-600 text-white flex items-center justify-center shadow-md group-hover:bg-orange-700 transition">
-                        <i class="fas fa-phone-alt text-lg" aria-hidden="true"></i>
-                    </span>
-                    <span class="text-2xl md:text-3xl font-black text-blue-900 font-en tracking-wide underline decoration-orange-500 decoration-2 underline-offset-4">01015944843</span>
-                </div>
-                <span class="inline-flex items-center justify-center gap-2 mt-3 text-sm font-black text-white bg-orange-600 group-hover:bg-orange-700 rounded-full px-5 py-2 shadow-md transition">
-                    اتصال فوري الآن
-                    <i class="fas fa-arrow-left text-xs" aria-hidden="true"></i>
-                </span>
-            </a>
             
-            <div class="flex flex-col gap-3">
-                <!-- Conversion Button for Google Ads -->
-                <a href="tel:01015944843" class="conversion-btn w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-full text-base md:text-lg shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95">
-                    <i class="fas fa-phone-alt"></i>
-                    <span>إتصال الآن</span>
+            <div class="space-y-4 mb-6">
+                <a href="tel:01015917480"
+                   class="conversion-btn group block bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 border-2 border-orange-500 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95"
+                   aria-label="اضغط للاتصال الآن على 01015917480">
+                    <p class="text-xs md:text-sm text-orange-700 font-bold mb-2 flex items-center justify-center gap-2">
+                        <i class="fas fa-hand-pointer animate-pulse" aria-hidden="true"></i>
+                        اضغط للاتصال مباشرة
+                    </p>
+                    <div class="flex items-center justify-center gap-3" dir="ltr">
+                        <span class="w-11 h-11 rounded-full bg-orange-600 text-white flex items-center justify-center shadow-md group-hover:bg-orange-700 transition">
+                            <i class="fas fa-phone-alt text-lg" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-2xl md:text-3xl font-black text-blue-900 font-en tracking-wide underline decoration-orange-500 decoration-2 underline-offset-4">01015917480</span>
+                    </div>
                 </a>
-                
+
+                <a href="tel:01015946843"
+                   class="conversion-btn group block bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border-2 border-blue-700 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95"
+                   aria-label="اضغط للاتصال الآن على 01015946843">
+                    <p class="text-xs md:text-sm text-blue-700 font-bold mb-2 flex items-center justify-center gap-2">
+                        <i class="fas fa-hand-pointer animate-pulse" aria-hidden="true"></i>
+                        اضغط للاتصال مباشرة
+                    </p>
+                    <div class="flex items-center justify-center gap-3" dir="ltr">
+                        <span class="w-11 h-11 rounded-full bg-blue-700 text-white flex items-center justify-center shadow-md group-hover:bg-blue-800 transition">
+                            <i class="fas fa-phone-alt text-lg" aria-hidden="true"></i>
+                        </span>
+                        <span class="text-2xl md:text-3xl font-black text-blue-900 font-en tracking-wide underline decoration-blue-500 decoration-2 underline-offset-4">01015946843</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="flex flex-col gap-3">
                 <button onclick="closeModal()" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-full transition text-sm md:text-base">
                     إلغاء
                 </button>
             </div>
-            
-            <p class="text-xs text-gray-400 mt-4">متاحون 24 ساعة طوال أيام الأسبوع</p>
-        </div>
+
     </div>
 
     <!-- Scripts -->
